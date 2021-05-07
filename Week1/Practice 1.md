@@ -34,7 +34,7 @@ $ docker run -d --name wordpress \
   --volume wordpress_data:/bitnami/wordpress \
   bitnami/wordpress:latest
 ```
-
+ 
 Access application at http://localhost:8080
 ![Practice 1 (1)](https://user-images.githubusercontent.com/48465162/117472251-e6ef8c00-af82-11eb-8124-d192feaf86f3.png)
 ![Practice 1 (2)](https://user-images.githubusercontent.com/48465162/117472268-ea831300-af82-11eb-8c1c-37544b00b617.png)
