@@ -1,5 +1,4 @@
 # Practice 1: Deploy WordPress with Command Line #
-Prerequisite: Apache2
 ---
 #### Step 1: Create a network
 
