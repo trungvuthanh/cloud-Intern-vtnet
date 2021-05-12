@@ -61,8 +61,6 @@ $ sudo docker run -d --name wordpress \
 
 #### Step 2: Access application at http://localhost:8080
 
-**(Note: you can use either *localhost* or VM2's ip address *192.168.x.x*)**
-
 ![{DD9C1347-A1CF-4FCE-9437-EBC22A4CAC09}](https://user-images.githubusercontent.com/48465162/117909436-7343db00-b304-11eb-9bbd-198ead4b32e9.png)
 
 ---
