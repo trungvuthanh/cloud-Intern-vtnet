@@ -117,6 +117,18 @@ sudo ovs-vsctl add-port br1 vxlan1 -- set interface vxlan1 type=vxlan options:re
 
 ### Part 3: Test ping Vxlan network, use Tcpdump or Wireshark to capture traffic between 2 virtual machines
 
+- From VM1 to VM2:
+
+```console
+ping -I br1 10.1.1.11
+```
+
+- From VM2 to VM1:
+
+```console
+ping -I br1 10.1.1.10
+```
+
 I'm currently having error "Activation of network connection failed", the result will be added soon..
 
 ### Part 4: Point out the advantages and disadvantages of using Vxlan network in datacenter
