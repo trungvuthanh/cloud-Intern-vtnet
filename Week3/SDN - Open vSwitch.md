@@ -28,8 +28,8 @@ I'm not going to rewrite everything about SDN or Open vSwitch or VXLAN here as w
 
 ## II. Practice
 
-VM1: 192.168.1.84
-VM2: 192.168.1.86
+VM1: 192.168.1.90
+VM2: 192.168.1.91
 
 ### Part 1: Create 2 Linux virtual machines and install openvswitch
 
@@ -48,7 +48,7 @@ Ensure `ovs-vswitchd` is active
 systemctl status ovs-vswitchd
 ```
 
-![SDN (1)](https://user-images.githubusercontent.com/48465162/119141098-10bead80-ba6f-11eb-9149-d68e38f2ad67.png)
+![SDN (1)](https://user-images.githubusercontent.com/48465162/119224339-2217c080-bb28-11eb-809e-6e973113999c.png)
 
 ### Part 2: Use openvswitch to setup Vxlan network between 2 virtual machines
 
@@ -71,14 +71,14 @@ sudo ovs-vsctl add-port br0 enp0s3
 
 ```console
 sudo ip a flush enp0s3
-sudo ifconfig br0 192.168.1.84/24
+sudo ifconfig br0 192.168.1.90/24
 ```
 
 - VM2:
 
 ```console
 sudo ip a flush enp0s3
-sudo ifconfig br0 192.168.1.86/24
+sudo ifconfig br0 192.168.1.91/24
 ```
 
 #### Step 4: Config ip for `br1`
@@ -100,20 +100,20 @@ sudo ifconfig br1 10.1.1.11/24
 - VM1:
 
 ```console
-sudo ovs-vsctl add-port br1 vxlan1 -- set interface vxlan1 type=vxlan options:remote_ip=192.168.1.86
+sudo ovs-vsctl add-port br1 vxlan1 -- set interface vxlan1 type=vxlan options:remote_ip=192.168.1.91
 ```
 
 - VM2:
 
 ```console
-sudo ovs-vsctl add-port br1 vxlan1 -- set interface vxlan1 type=vxlan options:remote_ip=192.168.1.84
+sudo ovs-vsctl add-port br1 vxlan1 -- set interface vxlan1 type=vxlan options:remote_ip=192.168.1.90
 ```
 
 #### Step 6: Check result
 
-![SDN (2)](https://user-images.githubusercontent.com/48465162/119167407-06f67380-ba8a-11eb-8243-ddb281f82004.png)
+![SDN (2)](https://user-images.githubusercontent.com/48465162/119224567-2bedf380-bb29-11eb-97e7-fefbf73a9e36.png)
 
-![SDN (3)](https://user-images.githubusercontent.com/48465162/119170693-d284b680-ba8d-11eb-8533-a76efe9864d7.png)
+![SDN (3)](https://user-images.githubusercontent.com/48465162/119224569-2db7b700-bb29-11eb-8769-3ba8f0208509.png)
 
 ### Part 3: Test ping Vxlan network, use Tcpdump or Wireshark to capture traffic between 2 virtual machines
 
@@ -123,13 +123,15 @@ sudo ovs-vsctl add-port br1 vxlan1 -- set interface vxlan1 type=vxlan options:re
 ping -I br1 10.1.1.11
 ```
 
+![SDN (4)](https://user-images.githubusercontent.com/48465162/119224662-b0407680-bb29-11eb-8efe-400298b8afa1.png)
+
 - From VM2 to VM1:
 
 ```console
 ping -I br1 10.1.1.10
 ```
 
-I'm currently having error "Activation of network connection failed", the result will be added soon..
+![SDN (5)](https://user-images.githubusercontent.com/48465162/119224663-b171a380-bb29-11eb-94bc-427741b05cd8.png)
 
 ### Part 4: Point out the advantages and disadvantages of using Vxlan network in datacenter
 
