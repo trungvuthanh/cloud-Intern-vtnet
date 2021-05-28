@@ -10,9 +10,9 @@
 
 ### Host machine configuration
 
-- 2 network interfaces: enp0s3, eth1
+- 2 network interfaces: enp0s3, enp0s8
 
-- 2GB main memory
+- 4GB main memory
 
 - 50GB disk space
 
@@ -23,13 +23,6 @@
 ```console
 sudo apt update
 sudo apt install python3-pip python3-dev libffi-dev gcc libssl-dev python3-venv -y
-```
-
-- Create bridge `eth1`
-
-```console
-sudo apt-get install bridge-utils
-sudo brctl addbr eth1
 ```
 
 - Create a virtual environment and activate it
@@ -107,10 +100,13 @@ nano /etc/kolla/globals.yml
 ```console
 kolla_base_distro: "ubuntu"
 kolla_install_type: "source"
-kolla_internal_vip_address: "192.168.1.93"
+kolla_internal_vip_address: "10.0.2.15"
 network_interface: "enp0s3"
-neutron_external_interface: "eth1"
+neutron_external_interface: "enp0s8"
 enable_haproxy: "no"
+enable_cinder: "yes"
+enable_cinder_backup: "no"
+enable_cinder_backend_lvm: "yes"
 ```
 
 ### Deployment
@@ -145,6 +141,24 @@ kolla-ansible -i ./all-in-one pull
 kolla-ansible -i ./all-in-one deploy
 ```
 
-![OpenStack (6) depoy](https://user-images.githubusercontent.com/48465162/119988429-4f64e280-bff0-11eb-9902-009419745f72.png)
+![OpenStack (6) deploy-error](https://user-images.githubusercontent.com/48465162/120033430-bc469f80-c025-11eb-9ca7-3d7cb7793716.png)
 
+Updating...
+
+### Using OpenStack
+
+- Install the OpenStack CLI client
+
+```console
+pip install python3-openstackclient
+```
+
+- OpenStack requires an openrc file where credentials for admin user are set. To generate this file run
+
+```console
+kolla-ansible post-deploy
+. /etc/kolla/admin-openrc.sh
+```
+
+---
 Updating...
