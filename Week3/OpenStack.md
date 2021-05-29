@@ -81,7 +81,17 @@ cp venv/share/kolla-ansible/ansible/inventory/* .
 ansible -i all-in-one all -m ping
 ```
 
-![OpenStack (1) test-ping](https://user-images.githubusercontent.com/48465162/119988299-26dce880-bff0-11eb-886e-366b17e3d650.png)
+- Test ping result
+
+```console
+localhost | SUCCESS => {
+    "ansible_facts": {
+        "discovered_interpreter_python": "/usr/bin/python3"
+    },
+    "changed": false,
+    "ping": "pong"
+}
+```
 
 - Generate password
 
