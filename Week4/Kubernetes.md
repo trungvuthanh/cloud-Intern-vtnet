@@ -6,7 +6,7 @@
 
 - [II. Practice](#II-Practice)
 
-  - [1. Minikube-&-kubectl](#1-Minikube-kubectl)
+  - [1. Minikube-&-kubectl](#1-Minikube--kubectl)
 
   - [2. Deploy MariaDB](#2-Deploy-MariaDB)
 
