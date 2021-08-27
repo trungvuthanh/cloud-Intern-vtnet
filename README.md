@@ -2,7 +2,7 @@
 
 Repository for Assignments
 
-## Current progress
+## Phase 1: Foundation Training Course
 
 1. `Week 1:` Virtualization and Cloud
 
